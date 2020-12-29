@@ -1,0 +1,73 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="YAF.SampleWebApplication.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: this.Page.Title %> - YAF.NET SampleWebApplication</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body id="YafBody" runat="server">
+    <YAF:Form runat="server" ID="form1">
+        <asp:ScriptManager runat="server" ID="ScriptManager">
+            <Scripts>
+                <asp:ScriptReference Path="~/Scripts/date.format.js" />
+                <asp:ScriptReference Path="~/Scripts/emojionearea.js" />
+                <asp:ScriptReference Path="~/Scripts/jquery.signalR-2.4.1.min.js" />
+                <asp:ScriptReference Path="~/Scripts/jquery.slimscroll.min.js" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <header>
+            <!-- Fixed navbar -->
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <a class="navbar-brand" runat="server" href="~/">YAF.NET SampleWebApplication</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Chat">Chat</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Forum/">Forum</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/About">About</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contact</a></li>
+                    </ul>
+                    <div class="form-inline mt-2 mt-md-0 text-white">
+                        <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                            <AnonymousTemplate>
+                                <asp:Button id="LoginLink" runat="server" 
+                                            CssClass="btn btn-outline-success my-2 my-sm-0 mr-sm-2" 
+                                            Text="Login"
+                                            OnClick="LoginLink_OnClick"></asp:Button>
+                                <asp:Button id="RegisterLink" runat="server" 
+                                            CssClass="btn btn-outline-success my-2 my-sm-0" 
+                                            Text="Register"
+                                            OnClick="RegisterLink_OnClick"></asp:Button>
+                            </AnonymousTemplate>
+                            <LoggedInTemplate>
+                                Welcome &nbsp;<span class="font-weight-bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>&nbsp;
+                                <asp:LoginStatus ID="HeadLoginStatus" runat="server" 
+                                                 LogoutAction="Redirect" 
+                                                 LogoutText="Log Out" 
+                                                 CssClass="btn btn-outline-success my-2 my-sm-0" LogoutPageUrl="~/"/>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - YetAnotherForum.NET</p>
+            </footer>
+        </div>
+
+    </YAF:Form>
+</body>
+</html>
